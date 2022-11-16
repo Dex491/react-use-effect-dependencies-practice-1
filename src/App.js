@@ -9,9 +9,18 @@ export default function App() {
   const [data, setData] = useState(null);
 
   console.log({ data });
+  console.log(dataType);
 
   // Write code here.
-  //
+  useEffect(() => {
+    if (dataType === "") {
+      setData(null);
+      return;
+    }
+    fetch(`https://swapi-new.herokuapp.com/api/${dataType}/`)
+      .then((res) => res.json())
+      .then((apiData) => setData(apiData));
+  }, [dataType]);
 
   return (
     <div>
